@@ -1,4 +1,4 @@
-# localStorageDB
+# Indexed localStorageDB
 ### a simple, tiny database layer for localStorage
 Kailash Nadh, September 2011
 
