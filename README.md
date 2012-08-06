@@ -1,6 +1,5 @@
 # Indexed localStorageDB
 ### a simple, tiny database layer for localStorage
-Kailash Nadh, September 2011
 
 Documentation: http://kailashnadh.name/code/localstoragedb
 Licensed under the MIT license.
@@ -21,3 +20,7 @@ lib.createTable("books",
 After the creation, each insert/update goes also to affect the indexes.
 
 The performances for medium/large data extraction/update from/to your localStorage will raise **significantly**.
+
+# Tests / Performance gain
+
+Check this link http://jsperf.com/indexed-localstoragedb to see the performance gain at his best (more than **double** ops/sec)
