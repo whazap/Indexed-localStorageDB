@@ -145,7 +145,7 @@ function localStorageDB(db_name) {
 		for (var i in db.tables[table_name].indexes) {
 			if (data.hasOwnProperty(i) && db.tables[table_name].indexes[i].hasOwnProperty(data[i])) {
 				index_has_been_used = true;
-				for (var j = 0; j < db.tables[table_name].indexes[i][data[i]]; j++) {
+				for (var j = 0; j < db.tables[table_name].indexes[i][data[i]].length; j++) {
 					extracting_data[db.tables[table_name].indexes[i][data[i]][j]] = null;
 				}
 			}
