@@ -1,12 +1,13 @@
-/*
-	Kailash Nadh (http://kailashnadh.name)
-	Del Bianco Luca <vshjxyz@gmail.com>
-	
-	localStorageDB
-	August 2012
-	A simple database layer for localStorage with indexes
+/*!
+ Kailash Nadh (http://kailashnadh.name)
+ Del Bianco Luca <vshjxyz@gmail.com>
+ Sebastian Herber (minor updates/fixes)
 
-	License	:	MIT License
+ localStorageDB
+ August 2012
+ A simple database layer for localStorage with indexes
+
+ License:	MIT License
 */
 function localStorageDB(db_name) {
 
@@ -79,6 +80,71 @@ function localStorageDB(db_name) {
 		db.data[table_name] = {};
 	}
 
+	// update a table
+	function updateTable(table_name, fields, indexes) {
+        var existingFields,
+            field,
+            fields_literal,
+            i,
+            isDifferent = false,
+            len,
+            structured_indexes;
+
+		if (table_name && db.tables[table_name]) {
+			if (fields) {
+				fields_literal = {};
+
+				for (i = 0; i < fields.length; i++) {
+					fields_literal[fields[i]] = true;
+				}
+
+				delete fields_literal['ID']; // ID is a reserved field name
+
+				fields = ['ID'];
+
+				for (field in fields_literal) {
+					if (fields_literal.hasOwnProperty(field)) {
+						fields.push(field);
+					}
+				}
+
+				existingFields = db.tables[table_name].fields;
+
+				for (i = 0, len = fields.length; i < len; ++i) {
+					if (!existingFields.contains(fields[i])) {
+						isDifferent = true;
+						break;
+					}
+				}
+
+				if (!isDifferent) {
+					for (i = 0, len = existingFields.length; i < len; ++i) {
+						if (!fields.contains(existingFields[i])) {
+							isDifferent = true;
+							break;
+						}
+					}
+				}
+
+				if (isDifferent) {
+					db.tables[table_name].fields = fields;
+				}
+			}
+
+			if (indexes) {
+				structured_indexes = {};
+
+				for (i = 0; i < indexes.length; i++) {
+					structured_indexes[indexes[i]] = {};
+				}
+
+				db.tables[table_name].indexes = fields;
+			}
+
+			commit();
+		}
+	}
+
 	// drop a table
 	function dropTable(table_name) {
 		delete db.tables[table_name];
@@ -120,6 +186,10 @@ function localStorageDB(db_name) {
 
 		return data.ID;
 	}
+
+    function getAutoIncrementValue(table_name) {
+        return db.tables[table_name].auto_increment;
+    }
 
 	// select rows, given a list of IDs of rows in a table
 	function select(table_name, ids) {
@@ -171,7 +241,7 @@ function localStorageDB(db_name) {
 				}
 
 				if (typeof data[field] == 'string') { // if the field is a string, do a case insensitive comparison
-					if (row[field].toString().toLowerCase() == data[field].toString().toLowerCase()) {
+					if (row[field] && (row[field].toString().toLowerCase() == data[field].toString().toLowerCase())) {
 						exists = true;
 						break;
 					}
@@ -329,7 +399,7 @@ function localStorageDB(db_name) {
 		for (var i = 0; i < db.tables[table_name].fields.length; i++) {
 			field = db.tables[table_name].fields[i];
 
-			if (data[field]) {
+			if (typeof data[field] !== "undefined") {
 				new_data[field] = data[field];
 			}
 		}
@@ -342,7 +412,7 @@ function localStorageDB(db_name) {
 			new_data = {};
 		for (var i = 0; i < db.tables[table_name].fields.length; i++) {
 			field = db.tables[table_name].fields[i];
-			new_data[field] = data[field] ? data[field] : null;
+			new_data[field] = (typeof data[field] !== "undefined") ? data[field] : null;
 		}
 		return new_data;
 	}
@@ -431,6 +501,11 @@ function localStorageDB(db_name) {
 
 			return result;
 		},
+		
+		updateTable: function (table_name, fields, indexes)
+		{
+			updateTable(table_name, fields, indexes);
+		},
 
 		// drop a table
 		dropTable: function (table_name) {
@@ -455,6 +530,11 @@ function localStorageDB(db_name) {
 			tableExistsWarn(table_name);
 			return insert(table_name, validateData(table_name, data));
 		},
+
+        // gets the new incremented id
+        getAutoIncrementValue: function (table_name) {
+            return getAutoIncrementValue(table_name);
+        },
 
 		// update rows
 		update: function (table_name, query, update_function) {
