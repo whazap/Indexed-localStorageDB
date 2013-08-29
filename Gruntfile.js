@@ -5,13 +5,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*!\n' +
-            'Kailash Nadh (http://kailashnadh.name)\n' +
-            'Del Bianco Luca <vshjxyz@gmail.com>\n' +
-            'Sebastian Herber (minor updates/fixes)\n\n' +
-            '<%= pkg.name %> <%= pkg.version %>\n' +
-            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-            '<%= pkg.description %>\n\n' +
-            'License: MIT License\n' +
+            ' Kailash Nadh (http://kailashnadh.name)\n' +
+            ' Del Bianco Luca <vshjxyz@gmail.com>\n\n' +
+            ' <%= pkg.name %> <%= pkg.version %>\n' +
+            ' <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            ' <%= pkg.description %>\n\n' +
+            ' License: MIT License\n' +
             '*/\n',
 
     // Task configuration.

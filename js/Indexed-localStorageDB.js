@@ -1,3 +1,12 @@
+/*
+ Kailash Nadh (http://kailashnadh.name)
+ Del Bianco Luca <vshjxyz@gmail.com>
+ localStorageDB
+ August 2012
+ A simple database layer for localStorage with indexes
+
+ License : MIT License
+ */
 
 function localStorageDB(db_name) {
 

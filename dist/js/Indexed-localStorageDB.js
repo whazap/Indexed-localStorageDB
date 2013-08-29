@@ -1,14 +1,22 @@
 /*!
-Kailash Nadh (http://kailashnadh.name)
-Del Bianco Luca <vshjxyz@gmail.com>
-Sebastian Herber (minor updates/fixes)
+ Kailash Nadh (http://kailashnadh.name)
+ Del Bianco Luca <vshjxyz@gmail.com>
 
-Indexed-localStorageDB 1.0.0
-2013-08-29
-A simple database layer for localStorage with indexes
+ Indexed-localStorageDB 1.0.0
+ 2013-08-29
+ A simple database layer for localStorage with indexes
 
-License: MIT License
+ License: MIT License
 */
+/*
+ Kailash Nadh (http://kailashnadh.name)
+ Del Bianco Luca <vshjxyz@gmail.com>
+ localStorageDB
+ August 2012
+ A simple database layer for localStorage with indexes
+
+ License : MIT License
+ */
 
 function localStorageDB(db_name) {
 
