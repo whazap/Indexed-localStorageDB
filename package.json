@@ -1,0 +1,21 @@
+{
+  "name": "Indexed-localStorageDB",
+  "version": "1.0.0",
+  "description": "A simple database layer for localStorage with indexes",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/whazap/Indexed-localStorageDB.git"
+  },
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/whazap/Indexed-localStorageDB/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-qunit": "~0.2.2"
+  }
+}
