@@ -39,7 +39,7 @@ module.exports = function(grunt) {
         src: ['<%= concat.main.dest %>'],
         dest: 'dist/js/<%= pkg.name %>.min.js'
       }
-    },
+    }
   });
 
   // These plugins provide necessary tasks.
