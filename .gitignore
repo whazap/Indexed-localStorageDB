@@ -1,7 +1,2 @@
-.idea
-.DS_Store
-*.swp
-*~
-
+tmp/
 node_modules/
-
